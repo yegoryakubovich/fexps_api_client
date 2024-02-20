@@ -1,0 +1,7 @@
+/dist
+/build
+/.idea
+/fexps_api_client.egg-info
+/venv
+*__pycache__
+test.py
