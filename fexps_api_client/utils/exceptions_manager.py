@@ -18,12 +18,11 @@
 from inspect import isclass
 
 from fexps_api_client.utils.exceptions import ApiException
-from fexps_api_client.utils.exceptions import account, article, exercise, image, main, meal, product
+from fexps_api_client.utils.exceptions import account, commission_pack, main, method, order, request, requisite, role, \
+    text, wallet
 
-
-groups = [account, article, exercise, image, main, meal, product]
+groups = [account, commission_pack, main, method, order, request, requisite, role, text, wallet]
 exceptions = {}
-
 
 for module in groups:
     for e in [e for e in [eval(f'module.{exception}') for exception in dir(module)] if isclass(e)]:
