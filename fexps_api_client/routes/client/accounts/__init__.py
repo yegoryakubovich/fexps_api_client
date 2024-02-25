@@ -63,7 +63,7 @@ class ClientAccountRoute(BaseRoute):
 
     async def check_username(self, username: str):
         return await self.request(
-            type_=RequestTypes.POST,
+            type_=RequestTypes.GET,
             prefix='/username/check',
             token_required=False,
             parameters={
@@ -73,7 +73,7 @@ class ClientAccountRoute(BaseRoute):
 
     async def check_password(self, password: str):
         return await self.request(
-            type_=RequestTypes.POST,
+            type_=RequestTypes.GET,
             prefix='/password/check',
             token_required=False,
             parameters={
