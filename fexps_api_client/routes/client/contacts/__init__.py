@@ -33,7 +33,7 @@ class ClientContactRoute(BaseRoute):
 
     async def get(self, id_):
         return await self.request(
-            type_=RequestTypes.POST,
+            type_=RequestTypes.GET,
             prefix='/get',
             parameters={
                 'id_': id_,

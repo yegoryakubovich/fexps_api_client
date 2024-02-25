@@ -56,7 +56,7 @@ class ClientAccountRoute(BaseRoute):
 
     async def get(self):
         return await self.request(
-            type_=RequestTypes.POST,
+            type_=RequestTypes.GET,
             prefix='/get',
             response_key='account',
         )
