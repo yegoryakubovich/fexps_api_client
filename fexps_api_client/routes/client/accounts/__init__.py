@@ -70,3 +70,13 @@ class ClientAccountRoute(BaseRoute):
                 'username': username,
             },
         )
+
+    async def check_password(self, password: str):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/password/check',
+            token_required=False,
+            parameters={
+                'password': password,
+            },
+        )
