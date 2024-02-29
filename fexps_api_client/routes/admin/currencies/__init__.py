@@ -15,28 +15,39 @@
 #
 
 
-from fexps_api_client.utils import BaseRoute
-from fexps_api_client.utils import RequestTypes
+from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class ClientLanguageRoute(BaseRoute):
-    prefix = '/languages'
+class AdminCurrencyRoute(BaseRoute):
+    prefix = '/currencies'
 
-    async def get(self, id_str: str):
+    async def create(
+            self,
+            id_str: str,
+            decimal: int,
+            rate_decimal: int,
+            div: int,
+    ):
         return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/get',
-            token_required=False,
+            type_=RequestTypes.POST,
+            prefix='/create',
+            parameters={
+                'id_str': id_str,
+                'decimal': decimal,
+                'rate_decimal': rate_decimal,
+                'div': div,
+            },
+            response_key='id_str',
+        )
+
+    async def delete(
+            self,
+            id_str: str,
+    ):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/delete',
             parameters={
                 'id_str': id_str,
             },
-            response_key='language',
-        )
-
-    async def get_list(self):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/list/get',
-            token_required=False,
-            response_key='languages',
         )

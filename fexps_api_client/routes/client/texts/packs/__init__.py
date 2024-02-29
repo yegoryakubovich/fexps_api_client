@@ -21,16 +21,6 @@ from fexps_api_client.utils import BaseRoute, RequestTypes
 class ClientTextPackRoute(BaseRoute):
     prefix = '/packs'
 
-    async def create(self, language: str):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/create',
-            parameters={
-                'language': language,
-            },
-            response_key='id',
-        )
-
     async def get(self, language: str):
         return await self.request(
             type_=RequestTypes.GET,
@@ -40,13 +30,4 @@ class ClientTextPackRoute(BaseRoute):
                 'language': language,
             },
             response_key='text_pack',
-        )
-
-    async def delete(self, id_: int):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/delete',
-            parameters={
-                'id_': id_,
-            },
         )

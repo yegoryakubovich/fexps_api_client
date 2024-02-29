@@ -15,28 +15,27 @@
 #
 
 
-from fexps_api_client.utils import BaseRoute
-from fexps_api_client.utils import RequestTypes
+from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class ClientLanguageRoute(BaseRoute):
-    prefix = '/languages'
+class AdminTextPackRoute(BaseRoute):
+    prefix = '/packs'
 
-    async def get(self, id_str: str):
+    async def create(self, language: str):
         return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/get',
-            token_required=False,
+            type_=RequestTypes.POST,
+            prefix='/create',
             parameters={
-                'id_str': id_str,
+                'language': language,
             },
-            response_key='language',
+            response_key='id',
         )
 
-    async def get_list(self):
+    async def delete(self, id_: int):
         return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/list/get',
-            token_required=False,
-            response_key='languages',
+            type_=RequestTypes.POST,
+            prefix='/delete',
+            parameters={
+                'id': id_,
+            },
         )

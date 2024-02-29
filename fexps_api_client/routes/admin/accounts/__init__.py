@@ -15,57 +15,42 @@
 #
 
 
-from fexps_api_client.routes.admin.wallets.bans import AdminWalletBanRoute
 from fexps_api_client.utils import BaseRoute, RequestTypes
+from .roles import AdminAccountRolesRoute
 
 
-class AdminWalletRoute(BaseRoute):
-    prefix = '/bans'
+class AdminAccountRoute(BaseRoute):
+    prefix = '/accounts'
 
-    bans = AdminWalletBanRoute()
+    roles = AdminAccountRolesRoute()
 
-    async def create(self, name: str):
+    async def get(self, id_: int = None):
         return await self.request(
             type_=RequestTypes.POST,
-            prefix='/create',
-            parameters={
-                'name': name,
-            },
-            response_key='id',
-        )
-
-    async def get(self, id_):
-        return await self.request(
-            type_=RequestTypes.GET,
             prefix='/get',
             parameters={
-                'id_': id_,
+                'id': id_,
             },
-            response_key='wallet',
+            response_key='account',
         )
 
-    async def get_list(self):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/list/get',
-            response_key='wallets',
-        )
-
-    async def update(self, id_: int, name: str):
+    async def search(self, id_: int = None, username: str = None, page: int = None):
         return await self.request(
             type_=RequestTypes.POST,
-            prefix='/update',
+            prefix='/search',
             parameters={
-                'id_': id_,
-                'name': name,
+                'id': id_,
+                'username': username,
+                'page': page,
             },
         )
 
-    async def delete(self, id_: int):
+    async def change_password(self, account_id: int):
         return await self.request(
             type_=RequestTypes.POST,
-            prefix='/delete',
+            prefix='/password/change',
             parameters={
-                'id_': id_,
+                'account_id': account_id,
             },
+            response_key='new_password',
         )

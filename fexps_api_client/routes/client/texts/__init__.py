@@ -15,56 +15,11 @@
 #
 
 
-from fexps_api_client.utils import BaseRoute, RequestTypes
+from fexps_api_client.utils import BaseRoute
 from .packs import ClientTextPackRoute
-from .translations import ClientTextTranslationRoute
 
 
 class ClientTextRoute(BaseRoute):
     prefix = '/texts'
 
     packs = ClientTextPackRoute()
-    translations = ClientTextTranslationRoute()
-
-    async def create(self, key: str, value_default: str):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/create',
-            parameters={
-                'key': key,
-                'value_default': value_default,
-            },
-            response_key='id',
-        )
-
-    async def get_list(self):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/list/get',
-            response_key='methods',
-        )
-
-    async def update(
-            self,
-            key: int,
-            new_key: str = None,
-            value_default: str = None,
-    ):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/update',
-            parameters={
-                'key': key,
-                'new_key': new_key,
-                'value_default': value_default,
-            },
-        )
-
-    async def delete(self, id_: int):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/delete',
-            parameters={
-                'id_': id_,
-            },
-        )

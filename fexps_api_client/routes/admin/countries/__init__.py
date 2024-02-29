@@ -15,57 +15,59 @@
 #
 
 
-from fexps_api_client.routes.admin.wallets.bans import AdminWalletBanRoute
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class AdminWalletRoute(BaseRoute):
-    prefix = '/bans'
+class AdminCountryRoute(BaseRoute):
+    prefix = '/countries'
 
-    bans = AdminWalletBanRoute()
-
-    async def create(self, name: str):
+    async def create(
+            self,
+            id_str: str,
+            name: str,
+            language: str,
+            timezone: str,
+            currency: str,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/create',
             parameters={
+                'id_str': id_str,
                 'name': name,
+                'language': language,
+                'timezone': timezone,
+                'currency': currency,
             },
-            response_key='id',
+            response_key='id_str',
         )
 
-    async def get(self, id_):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/get',
-            parameters={
-                'id_': id_,
-            },
-            response_key='wallet',
-        )
-
-    async def get_list(self):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/list/get',
-            response_key='wallets',
-        )
-
-    async def update(self, id_: int, name: str):
+    async def update(
+            self,
+            id_str: str,
+            language: str,
+            timezone: str,
+            currency: str,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/update',
             parameters={
-                'id_': id_,
-                'name': name,
+                'id_str': id_str,
+                'language': language,
+                'timezone': timezone,
+                'currency': currency,
             },
         )
 
-    async def delete(self, id_: int):
+    async def delete(
+            self,
+            id_str: str,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/delete',
             parameters={
-                'id_': id_,
+                'id_str': id_str,
             },
         )

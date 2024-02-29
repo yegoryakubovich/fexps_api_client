@@ -15,57 +15,55 @@
 #
 
 
-from fexps_api_client.routes.admin.wallets.bans import AdminWalletBanRoute
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class AdminWalletRoute(BaseRoute):
-    prefix = '/bans'
+class AdminTextTranslationRoute(BaseRoute):
+    prefix = '/translations'
 
-    bans = AdminWalletBanRoute()
-
-    async def create(self, name: str):
+    async def create(
+            self,
+            text_key: str,
+            language: str,
+            value: str,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/create',
             parameters={
-                'name': name,
+                'text_key': text_key,
+                'language': language,
+                'value': value,
             },
             response_key='id',
         )
 
-    async def get(self, id_):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/get',
-            parameters={
-                'id_': id_,
-            },
-            response_key='wallet',
-        )
-
-    async def get_list(self):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/list/get',
-            response_key='wallets',
-        )
-
-    async def update(self, id_: int, name: str):
+    async def update(
+            self,
+            text_key: str,
+            language: str,
+            value: str,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/update',
             parameters={
-                'id_': id_,
-                'name': name,
+                'text_key': text_key,
+                'language': language,
+                'value': value,
             },
         )
 
-    async def delete(self, id_: int):
+    async def delete(
+            self,
+            text_key: str,
+            language: str,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/delete',
             parameters={
-                'id_': id_,
+                'text_key': text_key,
+                'language': language,
             },
         )

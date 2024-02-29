@@ -16,12 +16,28 @@
 
 
 from fexps_api_client.utils import BaseRoute
+from .accounts import AdminAccountRoute
 from .commissions_packs import AdminCommissionPackRoute
+from .countries import AdminCountryRoute
+from .currencies import AdminCurrencyRoute
+from .languages import AdminLanguageRoute
+from .permissions import AdminPermissionRoute
+from .roles import AdminRoleRoute
+from .texts import AdminTextRoute
+from .timezones import AdminTimezoneRoute
 from .wallets import AdminWalletRoute
 
 
 class AdminRoute(BaseRoute):
     prefix = '/admin'
 
+    accounts = AdminAccountRoute()
     commissions_packs = AdminCommissionPackRoute()
+    countries = AdminCountryRoute()
+    currencies = AdminCurrencyRoute()
+    languages = AdminLanguageRoute()
+    permissions = AdminPermissionRoute()
+    roles = AdminRoleRoute()
+    texts = AdminTextRoute()
+    timezones = AdminTimezoneRoute()
     wallets = AdminWalletRoute()

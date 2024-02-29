@@ -21,16 +21,6 @@ from fexps_api_client.utils import BaseRoute, RequestTypes
 class ClientCurrencyRoute(BaseRoute):
     prefix = '/currencies'
 
-    async def create(self, id_str: str):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/create',
-            parameters={
-                'id_str': id_str,
-            },
-            response_key='id',
-        )
-
     async def get(self, id_str: str):
         return await self.request(
             type_=RequestTypes.GET,
@@ -48,16 +38,4 @@ class ClientCurrencyRoute(BaseRoute):
             prefix='/list/get',
             token_required=False,
             response_key='currencies',
-        )
-
-    async def delete(
-            self,
-            id_: int,
-    ):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/delete',
-            parameters={
-                'id_': id_,
-            },
         )

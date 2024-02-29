@@ -15,28 +15,45 @@
 #
 
 
-from fexps_api_client.utils import BaseRoute
-from fexps_api_client.utils import RequestTypes
+from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class ClientLanguageRoute(BaseRoute):
-    prefix = '/languages'
+class AdminPermissionRoute(BaseRoute):
+    prefix = '/permissions'
+
+    async def create(self, id_str: str, name: str):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/create',
+            parameters={
+                'id_str': id_str,
+                'name': name,
+            },
+            response_key='id',
+        )
+
+    async def delete(self, id_str: str):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/delete',
+            parameters={
+                'id_str': id_str,
+            },
+        )
 
     async def get(self, id_str: str):
         return await self.request(
             type_=RequestTypes.GET,
             prefix='/get',
-            token_required=False,
             parameters={
                 'id_str': id_str,
             },
-            response_key='language',
+            response_key='permission',
         )
 
     async def get_list(self):
         return await self.request(
             type_=RequestTypes.GET,
             prefix='/list/get',
-            token_required=False,
-            response_key='languages',
+            response_key='permissions',
         )

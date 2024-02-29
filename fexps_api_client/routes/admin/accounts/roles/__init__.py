@@ -18,37 +18,52 @@
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class ClientTextTranslationRoute(BaseRoute):
-    prefix = '/translations'
+class AdminAccountRolesRoute(BaseRoute):
+    prefix = '/roles'
 
-    async def create(self, text_key: str, language: str, value: str):
+    async def create(
+            self,
+            account_id: int,
+            role_id: int,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/create',
             parameters={
-                'text_key': text_key,
-                'language': language,
-                'value': value,
+                'account_id': account_id,
+                'role_id': role_id,
             },
             response_key='id',
         )
 
-    async def update(self, text_key: int, language: str, value: list):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/update',
-            parameters={
-                'text_key': text_key,
-                'language': language,
-                'value': value,
-            },
-        )
-
-    async def delete(self, id_: int):
+    async def delete(
+            self,
+            id_: int,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/delete',
             parameters={
-                'id_': id_,
+                'id': id_,
             },
+        )
+
+    async def get(
+            self,
+            account_id: int,
+    ):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/get',
+            parameters={
+                'account_id': account_id
+            },
+            response_key='accounts_roles',
+        )
+
+    async def get_list(self):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/list/get',
+            response_key='roles',
         )
