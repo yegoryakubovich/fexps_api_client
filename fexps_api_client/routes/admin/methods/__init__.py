@@ -18,40 +18,48 @@
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class ClientRequestRoute(BaseRoute):
-    prefix = '/requests'
+class AdminMethodRoute(BaseRoute):
+    prefix = '/methods'
 
     async def create(
             self,
-            wallet_id: int,
-            type_: str,
-            input_method_id: int = None,
-            input_currency_value: int = None,
-            input_value: int = None,
-            output_currency_value: int = None,
-            output_value: int = None,
-            output_requisite_data_id: int = None,
+            currency: str,
+            name: str,
+            fields: list[dict],
+            confirmation_fields: list[dict],
     ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/create',
             parameters={
-                'wallet_id': wallet_id,
-                'type_': type_,
-                'input_method_id': input_method_id,
-                'input_currency_value': input_currency_value,
-                'input_value': input_value,
-                'output_requisite_data_id': output_requisite_data_id,
-                'output_currency_value': output_currency_value,
-                'output_value': output_value,
+                'currency': currency,
+                'name': name,
+                'fields': fields,
+                'confirmation_fields': confirmation_fields,
             },
             response_key='id',
         )
 
-    async def update_confirmation(self, id_: int):
+    async def update(
+            self,
+            id_: int,
+            currency_id_str: str = None,
+            schema_fields: list = None,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
-            prefix='/update/confirmation',
+            prefix='/update',
+            parameters={
+                'id_': id_,
+                'currency_id_str': currency_id_str,
+                'schema_fields': schema_fields,
+            },
+        )
+
+    async def delete(self, id_: int):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/delete',
             parameters={
                 'id_': id_,
             },

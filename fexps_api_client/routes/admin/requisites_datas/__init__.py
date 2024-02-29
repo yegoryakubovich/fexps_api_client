@@ -18,22 +18,25 @@
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class ClientRequisiteDataRoute(BaseRoute):
+class AdminRequisiteDataRoute(BaseRoute):
     prefix = '/requisites_datas'
 
-    async def get(self, id_):
+    async def create(self, method_id: int, fields: dict):
         return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/get',
+            type_=RequestTypes.POST,
+            prefix='/create',
+            parameters={
+                'method_id': method_id,
+                'fields': fields,
+            },
+            response_key='id',
+        )
+
+    async def delete(self, id_: int):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/delete',
             parameters={
                 'id_': id_,
             },
-            response_key='requisite_data',
-        )
-
-    async def get_list(self):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/list/get',
-            response_key='requisite_datas',
         )

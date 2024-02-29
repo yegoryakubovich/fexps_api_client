@@ -15,25 +15,11 @@
 #
 
 
-from fexps_api_client.utils import BaseRoute, RequestTypes
+from fexps_api_client.utils import BaseRoute
+from .requests import AdminOrderRequestRoute
 
 
-class ClientRequisiteDataRoute(BaseRoute):
-    prefix = '/requisites_datas'
+class AdminOrderRoute(BaseRoute):
+    prefix = '/orders'
 
-    async def get(self, id_):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/get',
-            parameters={
-                'id_': id_,
-            },
-            response_key='requisite_data',
-        )
-
-    async def get_list(self):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/list/get',
-            response_key='requisite_datas',
-        )
+    requests = AdminOrderRequestRoute()

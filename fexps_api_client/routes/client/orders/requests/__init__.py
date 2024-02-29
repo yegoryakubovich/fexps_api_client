@@ -47,12 +47,3 @@ class ClientOrderRequestRoute(BaseRoute):
                 'state': state,
             },
         )
-
-    async def delete(self, id_: int):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/delete',
-            parameters={
-                'id_': id_,
-            },
-        )
