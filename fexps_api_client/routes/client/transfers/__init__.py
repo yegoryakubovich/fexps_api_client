@@ -18,8 +18,25 @@
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class ClientMethodRoute(BaseRoute):
-    prefix = '/methods'
+class ClientTransfersRoute(BaseRoute):
+    prefix = '/transfers'
+
+    async def create(
+            self,
+            wallet_from_id: int,
+            wallet_to_id: int,
+            value: int,
+    ):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/create',
+            parameters={
+                'wallet_from_id': wallet_from_id,
+                'wallet_to_id': wallet_to_id,
+                'value': value,
+            },
+            response_key='id',
+        )
 
     async def get(self, id_):
         return await self.request(
@@ -28,14 +45,17 @@ class ClientMethodRoute(BaseRoute):
             parameters={
                 'id_': id_,
             },
-            token_required=False,
-            response_key='method',
+            response_key='transfer',
         )
 
-    async def get_list(self):
+    async def search(self, wallet_id: int, is_sender: bool = True, is_receiver: bool = True, page: int = None):
         return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/list/get',
-            token_required=False,
-            response_key='methods',
+            type_=RequestTypes.POST,
+            prefix='/search',
+            parameters={
+                'wallet_id': wallet_id,
+                'is_sender': is_sender,
+                'is_receiver': is_receiver,
+                'page': page,
+            },
         )

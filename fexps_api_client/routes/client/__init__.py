@@ -30,6 +30,7 @@ from .roles import ClientRoleRoute
 from .sessions import ClientSessionRoute
 from .texts import ClientTextRoute
 from .timezones import ClientTimezoneRoute
+from .transfers import ClientTransfersRoute
 from .wallets import ClientWalletRoute
 
 
@@ -48,4 +49,5 @@ class ClientRoute(BaseRoute):
     sessions = ClientSessionRoute()
     texts = ClientTextRoute()
     timezones = ClientTimezoneRoute()
+    transfers = ClientTransfersRoute()
     wallets = ClientWalletRoute()
