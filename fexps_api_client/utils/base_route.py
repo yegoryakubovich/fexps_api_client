@@ -47,7 +47,7 @@ class BaseRoute:
                 route.__init__(url=self.url, token=self.token)
 
     async def create_url(self, prefix: str, parameters: dict) -> str:
-        f = furl(url=self.url+prefix)
+        f = furl(url=self.url + prefix)
         f.set(args=parameters)
         return f.url
 
@@ -62,7 +62,7 @@ class BaseRoute:
 
         have_data = False
         for pk, pv in parameters.items():
-            if isinstance(pv, BufferedReader):
+            if isinstance(pv, BufferedReader) or isinstance(pv, bytes):
                 have_data = True
                 data[pk] = pv
                 continue
