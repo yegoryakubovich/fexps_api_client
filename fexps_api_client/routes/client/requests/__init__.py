@@ -48,6 +48,26 @@ class ClientRequestRoute(BaseRoute):
             response_key='id',
         )
 
+    async def search(
+            self,
+            is_input: bool = True,
+            is_output: bool = True,
+            is_all: bool = True,
+            is_finish: bool = False,
+            page: int = None
+    ):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/search',
+            parameters={
+                'is_input': is_input,
+                'is_output': is_output,
+                'is_all': is_all,
+                'is_finish': is_finish,
+                'page': page,
+            },
+        )
+
     async def update_confirmation(self, id_: int):
         return await self.request(
             type_=RequestTypes.POST,
