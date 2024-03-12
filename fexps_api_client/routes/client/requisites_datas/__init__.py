@@ -50,6 +50,16 @@ class ClientRequisiteDataRoute(BaseRoute):
             response_key='requisite_datas',
         )
 
+    async def update(self, id_: int, fields: dict):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/update',
+            parameters={
+                'id_': id_,
+                'fields': fields,
+            },
+        )
+
     async def delete(self, id_: int):
         return await self.request(
             type_=RequestTypes.POST,
