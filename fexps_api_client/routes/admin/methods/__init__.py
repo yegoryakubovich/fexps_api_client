@@ -26,7 +26,7 @@ class AdminMethodRoute(BaseRoute):
             currency: str,
             name: str,
             fields: list[dict],
-            confirmation_fields: list[dict],
+            input_fields: list[dict],
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -35,7 +35,7 @@ class AdminMethodRoute(BaseRoute):
                 'currency': currency,
                 'name': name,
                 'fields': fields,
-                'confirmation_fields': confirmation_fields,
+                'input_fields': input_fields,
             },
             response_key='id',
         )
@@ -44,7 +44,8 @@ class AdminMethodRoute(BaseRoute):
             self,
             id_: int,
             currency_id_str: str = None,
-            schema_fields: list = None,
+            fields: list = None,
+            input_fields: list = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -52,7 +53,8 @@ class AdminMethodRoute(BaseRoute):
             parameters={
                 'id_': id_,
                 'currency_id_str': currency_id_str,
-                'schema_fields': schema_fields,
+                'fields': fields,
+                'input_fields': input_fields,
             },
         )
 
