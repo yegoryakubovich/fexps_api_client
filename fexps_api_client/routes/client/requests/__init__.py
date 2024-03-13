@@ -28,9 +28,9 @@ class ClientRequestRoute(BaseRoute):
             input_method_id: int = None,
             input_currency_value: int = None,
             input_value: int = None,
+            output_requisite_data_id: int = None,
             output_currency_value: int = None,
             output_value: int = None,
-            output_requisite_data_id: int = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -46,6 +46,18 @@ class ClientRequestRoute(BaseRoute):
                 'output_value': output_value,
             },
             response_key='id',
+        )
+
+    async def get(
+            self,
+            id_: int,
+    ):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/get',
+            parameters={
+                'id_': id_,
+            },
         )
 
     async def search(
