@@ -58,6 +58,7 @@ class ClientRequestRoute(BaseRoute):
             parameters={
                 'id_': id_,
             },
+            response_key='request',
         )
 
     async def search(
