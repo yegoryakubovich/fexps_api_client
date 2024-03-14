@@ -35,6 +35,5 @@ class ClientOrderRoute(BaseRoute):
             parameters={
                 'id_': id_,
             },
-            token_required=False,
-            response_key='method',
+            response_key='order',
         )
