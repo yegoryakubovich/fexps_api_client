@@ -24,7 +24,7 @@ from .updates import ClientOrderUpdateRoute
 class ClientOrderRoute(BaseRoute):
     prefix = '/orders'
 
-    contacts = ClientOrderListGetRoute()
+    list_get = ClientOrderListGetRoute()
     updates = ClientOrderUpdateRoute()
     requests = ClientOrderRequestRoute()
 

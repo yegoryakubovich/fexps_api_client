@@ -21,16 +21,22 @@ from fexps_api_client.utils import BaseRoute, RequestTypes
 class ClientOrderListGetRoute(BaseRoute):
     prefix = '/list/get'
 
-    async def by_request(self):
+    async def by_request(self, request_id: int):
         return await self.request(
             type_=RequestTypes.GET,
             prefix='/request',
+            parameters={
+                'request_id': request_id,
+            },
             response_key='orders',
         )
 
-    async def by_requisite(self):
+    async def by_requisite(self, requisite_id: int):
         return await self.request(
             type_=RequestTypes.GET,
             prefix='/requisite',
+            parameters={
+                'requisite_id': requisite_id,
+            },
             response_key='orders',
         )
