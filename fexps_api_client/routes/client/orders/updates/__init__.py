@@ -33,14 +33,14 @@ class ClientOrderUpdateRoute(BaseRoute):
     async def confirmation(
             self,
             id_: int,
-            confirmation_fields: dict,
+            input_fields: dict,
     ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/confirmation',
             parameters={
                 'id_': id_,
-                'confirmation_fields': confirmation_fields,
+                'input_fields': input_fields,
             },
         )
 
