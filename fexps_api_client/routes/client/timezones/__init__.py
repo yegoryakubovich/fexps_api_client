@@ -21,6 +21,17 @@ from fexps_api_client.utils import BaseRoute, RequestTypes
 class ClientTimezoneRoute(BaseRoute):
     prefix = '/timezones'
 
+    async def get(self, id_str: str):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/get',
+            token_required=False,
+            parameters={
+                'id_str': id_str,
+            },
+            response_key='timezone',
+        )
+
     async def get_list(self):
         return await self.request(
             type_=RequestTypes.GET,
