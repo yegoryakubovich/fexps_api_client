@@ -48,7 +48,7 @@ class ClientTransfersRoute(BaseRoute):
             response_key='transfer',
         )
 
-    async def search(self, wallet_id: int, is_sender: bool = True, is_receiver: bool = True, page: int = None):
+    async def search(self, wallet_id: int, is_sender: bool = True, is_receiver: bool = True, page: int = 1):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/search',

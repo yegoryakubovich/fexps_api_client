@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-
+import logging
+from datetime import datetime, timedelta
 from io import BufferedReader
 
 from addict import Dict
@@ -30,21 +30,41 @@ class RequestTypes:
     POST = 'post'
 
 
+def rec_keys(dictio, deviation: int):
+    if isinstance(dictio, dict):
+        for (key, value) in dictio.items():
+            if isinstance(value, dict) or isinstance(value, list):
+                rec_keys(value, deviation)
+                continue
+            if key == 'date':
+                try:
+                    dictio[key] = datetime.strptime(value, '%d-%m-%y %H:%M') + timedelta(hours=deviation)
+                except:
+                    pass
+    elif isinstance(dictio, list):
+        for value in dictio:
+            if isinstance(value, dict):
+                rec_keys(value, deviation)
+                continue
+    return dictio
+
+
 class BaseRoute:
     url: str = ''
     prefix: str = ''
     token: str = None
 
-    def __init__(self, url: str = None, token: str = None):
+    def __init__(self, url: str = None, token: str = None, deviation: int = 0):
         if not url:
             return
 
         self.url = url + self.prefix
         self.token = token
+        self.deviation = deviation
         for i in dir(self):
             if issubclass(eval(f'type(self.{i})'), BaseRoute):
                 route: BaseRoute = eval(f'self.{i}')
-                route.__init__(url=self.url, token=self.token)
+                route.__init__(url=self.url, token=self.token, deviation=self.deviation)
 
     async def create_url(self, prefix: str, parameters: dict) -> str:
         f = furl(url=self.url + prefix)
@@ -104,6 +124,7 @@ class BaseRoute:
 
             try:
                 response_json = await response.json()
+                rec_keys(response_json, deviation=self.deviation)
                 response = Dict(**response_json)
             except ContentTypeError:
                 return response
