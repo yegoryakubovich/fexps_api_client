@@ -24,7 +24,7 @@ from .languages import ClientLanguageRoute
 from .methods import ClientMethodRoute
 from .orders import ClientOrderRoute
 from .requests import ClientRequestRoute
-from .requisite import ClientRequisiteRoute
+from .requisites import ClientRequisiteRoute
 from .requisites_datas import ClientRequisiteDataRoute
 from .roles import ClientRoleRoute
 from .sessions import ClientSessionRoute

@@ -19,7 +19,7 @@ from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
 class ClientRequisiteRoute(BaseRoute):
-    prefix = '/requisite'
+    prefix = '/requisites'
 
     async def create(
             self,
@@ -61,7 +61,7 @@ class ClientRequisiteRoute(BaseRoute):
             parameters={
                 'id_': id_,
             },
-            response_key='requisite',
+            response_key='requisites',
         )
 
     async def update(
