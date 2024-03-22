@@ -64,6 +64,22 @@ class ClientRequisiteRoute(BaseRoute):
             response_key='requisites',
         )
 
+    async def search(
+            self,
+            is_input: bool = True,
+            is_output: bool = True,
+            page: int = None
+    ):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/search',
+            parameters={
+                'is_input': is_input,
+                'is_output': is_output,
+                'page': page,
+            },
+        )
+
     async def update(
             self,
             id_: int,
