@@ -40,6 +40,24 @@ class AdminCurrencyRoute(BaseRoute):
             response_key='id_str',
         )
 
+    async def update(
+            self,
+            id_str: str,
+            decimal: int = None,
+            rate_decimal: int = None,
+            div: int = None,
+    ):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/update',
+            parameters={
+                'id_str': id_str,
+                'decimal': decimal,
+                'rate_decimal': rate_decimal,
+                'div': div,
+            },
+        )
+
     async def delete(
             self,
             id_str: str,

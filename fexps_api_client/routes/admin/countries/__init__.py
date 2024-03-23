@@ -45,15 +45,17 @@ class AdminCountryRoute(BaseRoute):
     async def update(
             self,
             id_str: str,
-            language: str,
-            timezone: str,
-            currency: str,
+            name: str = None,
+            language: str = None,
+            timezone: str = None,
+            currency: str = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/update',
             parameters={
                 'id_str': id_str,
+                'name': name,
                 'language': language,
                 'timezone': timezone,
                 'currency': currency,
