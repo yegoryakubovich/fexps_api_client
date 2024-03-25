@@ -63,20 +63,16 @@ class ClientRequestRoute(BaseRoute):
 
     async def search(
             self,
-            is_input: bool = True,
-            is_output: bool = True,
-            is_all: bool = True,
-            is_finish: bool = False,
-            page: int = None
+            is_completed: bool = False,
+            is_canceled: bool = False,
+            page: int = 1
     ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/search',
             parameters={
-                'is_input': is_input,
-                'is_output': is_output,
-                'is_all': is_all,
-                'is_finish': is_finish,
+                'is_completed': is_completed,
+                'is_canceled': is_canceled,
                 'page': page,
             },
         )
