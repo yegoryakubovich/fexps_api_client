@@ -34,7 +34,7 @@ class ClientOrderListGetRoute(BaseRoute):
     async def by_requisite(self, requisite_id: int):
         return await self.request(
             type_=RequestTypes.GET,
-            prefix='/requisites',
+            prefix='/requisite',
             parameters={
                 'requisite_id': requisite_id,
             },
