@@ -61,14 +61,14 @@ class ClientRequisiteRoute(BaseRoute):
             parameters={
                 'id_': id_,
             },
-            response_key='requisites',
+            response_key='requisite',
         )
 
     async def search(
             self,
             is_input: bool = True,
             is_output: bool = True,
-            page: int = None
+            page: int = 1,
     ):
         return await self.request(
             type_=RequestTypes.POST,

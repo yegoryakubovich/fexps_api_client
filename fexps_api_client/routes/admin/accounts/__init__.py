@@ -34,7 +34,12 @@ class AdminAccountRoute(BaseRoute):
             response_key='account',
         )
 
-    async def search(self, id_: int = None, username: str = None, page: int = None):
+    async def search(
+            self,
+            id_: int = None,
+            username: str = None,
+            page: int = 1,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/search',
