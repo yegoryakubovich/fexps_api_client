@@ -65,7 +65,7 @@ class ClientRequestRoute(BaseRoute):
             self,
             is_completed: bool = False,
             is_canceled: bool = False,
-            page: int = 1
+            page: int = 1,
     ):
         return await self.request(
             type_=RequestTypes.POST,
