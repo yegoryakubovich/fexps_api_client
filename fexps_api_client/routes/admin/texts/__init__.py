@@ -26,7 +26,12 @@ class AdminTextRoute(BaseRoute):
     translations = AdminTextTranslationRoute()
     packs = AdminTextPackRoute()
 
-    async def create(self, key: str, value_default: str, create_text_pack: bool = True):
+    async def create(
+            self,
+            key: str,
+            value_default: str,
+            create_text_pack: bool = True,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/create',
@@ -36,26 +41,6 @@ class AdminTextRoute(BaseRoute):
                 'create_text_pack': create_text_pack,
             },
             response_key='key',
-        )
-
-    async def update(self, key: str, value_default: str = None, new_key: str = None):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/update',
-            parameters={
-                'key': key,
-                'value_default': value_default,
-                'new_key': new_key,
-            },
-        )
-
-    async def delete(self, key: str):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/delete',
-            parameters={
-                'key': key,
-            },
         )
 
     async def get(self, key: str):
@@ -73,4 +58,36 @@ class AdminTextRoute(BaseRoute):
             type_=RequestTypes.GET,
             prefix='/list/get',
             response_key='texts',
+        )
+
+    async def update(
+            self,
+            key: str,
+            value_default: str = None,
+            new_key: str = None,
+            create_text_pack: bool = True,
+    ):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/update',
+            parameters={
+                'key': key,
+                'value_default': value_default,
+                'new_key': new_key,
+                'create_text_pack': create_text_pack,
+            },
+        )
+
+    async def delete(
+            self,
+            key: str,
+            create_text_pack: bool = True,
+    ):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/delete',
+            parameters={
+                'key': key,
+                'create_text_pack': create_text_pack,
+            },
         )

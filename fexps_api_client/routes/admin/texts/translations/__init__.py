@@ -26,6 +26,7 @@ class AdminTextTranslationRoute(BaseRoute):
             text_key: str,
             language: str,
             value: str,
+            create_text_pack: bool = True,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -34,6 +35,7 @@ class AdminTextTranslationRoute(BaseRoute):
                 'text_key': text_key,
                 'language': language,
                 'value': value,
+                'create_text_pack': create_text_pack,
             },
             response_key='id',
         )
@@ -43,6 +45,7 @@ class AdminTextTranslationRoute(BaseRoute):
             text_key: str,
             language: str,
             value: str,
+            create_text_pack: bool = True,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -51,6 +54,7 @@ class AdminTextTranslationRoute(BaseRoute):
                 'text_key': text_key,
                 'language': language,
                 'value': value,
+                'create_text_pack': create_text_pack,
             },
         )
 
@@ -58,6 +62,7 @@ class AdminTextTranslationRoute(BaseRoute):
             self,
             text_key: str,
             language: str,
+            create_text_pack: bool = True,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -65,5 +70,6 @@ class AdminTextTranslationRoute(BaseRoute):
             parameters={
                 'text_key': text_key,
                 'language': language,
+                'create_text_pack': create_text_pack,
             },
         )

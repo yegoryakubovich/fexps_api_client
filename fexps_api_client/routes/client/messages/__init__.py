@@ -26,7 +26,7 @@ class ClientMessageRoute(BaseRoute):
             type_=RequestTypes.GET,
             prefix='/get',
             parameters={
-                'id': id_,
+                'id_': id_,
             },
             response_key='message',
         )

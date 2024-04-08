@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-
+import logging
 from datetime import datetime, timedelta
 from io import BufferedReader
 
@@ -29,6 +28,7 @@ from fexps_api_client.utils.exceptions_manager import exceptions
 class RequestTypes:
     GET = 'get'
     POST = 'post'
+    WEBSOCKET = 'websocket'
 
 
 def rec_keys(dictio, deviation: int):
@@ -122,6 +122,8 @@ class BaseRoute:
                 response = await session.post(url=url, data=data)
             elif type_ == RequestTypes.POST:
                 response = await session.post(url=url, json=json)
+            elif type_ == RequestTypes.WEBSOCKET:
+                response = await session.ws_connect(url=url,)
 
             try:
                 response_json = await response.json()
@@ -136,6 +138,7 @@ class BaseRoute:
 
             return response
         elif response.state == 'error':
+            logging.critical(response)
             try:
                 raise exceptions[response.error.code](message=response.error.message, kwargs=response.error.kwargs)
             except TypeError:

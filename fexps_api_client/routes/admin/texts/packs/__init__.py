@@ -31,6 +31,12 @@ class AdminTextPackRoute(BaseRoute):
             response_key='id',
         )
 
+    async def create_all(self):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/all/create',
+        )
+
     async def delete(self, id_: int):
         return await self.request(
             type_=RequestTypes.POST,
