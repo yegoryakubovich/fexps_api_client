@@ -23,10 +23,10 @@ class ClientOrderListGetRoute(BaseRoute):
 
     async def main(
             self,
-            by_request: bool,
-            by_requisite: bool,
-            is_active: bool,
-            is_finished: bool,
+            by_request: bool = False,
+            by_requisite: bool = False,
+            is_active: bool = False,
+            is_finished: bool = False,
     ):
         return await self.request(
             type_=RequestTypes.GET,
