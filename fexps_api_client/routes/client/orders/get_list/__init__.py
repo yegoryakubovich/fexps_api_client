@@ -21,6 +21,25 @@ from fexps_api_client.utils import BaseRoute, RequestTypes
 class ClientOrderListGetRoute(BaseRoute):
     prefix = '/list/get'
 
+    async def main(
+            self,
+            by_request: bool,
+            by_requisite: bool,
+            is_active: bool,
+            is_finished: bool,
+    ):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/main',
+            parameters={
+                'by_request': by_request,
+                'by_requisite': by_requisite,
+                'is_active': is_active,
+                'is_finished': is_finished,
+            },
+            response_key='orders',
+        )
+
     async def by_request(self, request_id: int):
         return await self.request(
             type_=RequestTypes.GET,
