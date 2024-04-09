@@ -25,9 +25,9 @@ class AdminCountryRoute(BaseRoute):
             self,
             id_str: str,
             name: str,
-            language: str,
-            timezone: str,
-            currency: str,
+            language_default: str,
+            timezone_default: str,
+            currency_default: str,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -35,9 +35,9 @@ class AdminCountryRoute(BaseRoute):
             parameters={
                 'id_str': id_str,
                 'name': name,
-                'language': language,
-                'timezone': timezone,
-                'currency': currency,
+                'language_default': language_default,
+                'timezone_default': timezone_default,
+                'currency_default': currency_default,
             },
             response_key='id_str',
         )
@@ -46,9 +46,9 @@ class AdminCountryRoute(BaseRoute):
             self,
             id_str: str,
             name: str = None,
-            language: str = None,
-            timezone: str = None,
-            currency: str = None,
+            language_default: str = None,
+            timezone_default: str = None,
+            currency_default: str = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -56,9 +56,9 @@ class AdminCountryRoute(BaseRoute):
             parameters={
                 'id_str': id_str,
                 'name': name,
-                'language': language,
-                'timezone': timezone,
-                'currency': currency,
+                'language_default': language_default,
+                'timezone_default': timezone_default,
+                'currency_default': currency_default,
             },
         )
 
