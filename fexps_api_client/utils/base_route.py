@@ -13,12 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import logging
 from datetime import datetime, timedelta
 from io import BufferedReader
 
 from addict import Dict
-from aiohttp import ClientSession, ContentTypeError
+from aiohttp import ClientSession, ContentTypeError, FormData
 from furl import furl
 
 from fexps_api_client.utils.exceptions import ApiException
@@ -28,7 +27,6 @@ from fexps_api_client.utils.exceptions_manager import exceptions
 class RequestTypes:
     GET = 'get'
     POST = 'post'
-    WEBSOCKET = 'websocket'
 
 
 def rec_keys(dictio, deviation: int):
@@ -77,7 +75,7 @@ class BaseRoute:
 
         json = {}
         url_parameters = {}
-        data = {}
+        data = FormData()
         if token_required and self.token:
             url_parameters['token'] = self.token
 
@@ -85,7 +83,7 @@ class BaseRoute:
         for pk, pv in parameters.items():
             if isinstance(pv, BufferedReader) or isinstance(pv, bytes):
                 have_data = True
-                data[pk] = pv
+                data.add_field(name=pk, value=pv, filename='1.jpg', content_type='image/jpeg')
                 continue
 
             url_parameters[pk] = pv
@@ -122,9 +120,6 @@ class BaseRoute:
                 response = await session.post(url=url, data=data)
             elif type_ == RequestTypes.POST:
                 response = await session.post(url=url, json=json)
-            elif type_ == RequestTypes.WEBSOCKET:
-                response = await session.ws_connect(url=url,)
-
             try:
                 response_json = await response.json()
                 rec_keys(response_json, deviation=self.deviation)
@@ -135,10 +130,8 @@ class BaseRoute:
         if response.state == 'successful':
             if response_key:
                 response = response.get(response_key)
-
             return response
         elif response.state == 'error':
-            logging.critical(response)
             try:
                 raise exceptions[response.error.code](message=response.error.message, kwargs=response.error.kwargs)
             except TypeError:

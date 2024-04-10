@@ -77,6 +77,16 @@ class ClientRequestRoute(BaseRoute):
             },
         )
 
+    async def update_name(self, id_: int, name: str):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/update/name',
+            parameters={
+                'id_': id_,
+                'name': name,
+            },
+        )
+
     async def update_confirmation(self, id_: int):
         return await self.request(
             type_=RequestTypes.POST,
