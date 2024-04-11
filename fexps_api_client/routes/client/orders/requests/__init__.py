@@ -25,7 +25,7 @@ class ClientOrderRequestRoute(BaseRoute):
             self,
             order_id: int,
             type_: str,
-            value: int,
+            value: int = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,

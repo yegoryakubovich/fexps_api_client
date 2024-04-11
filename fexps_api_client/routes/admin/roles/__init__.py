@@ -34,20 +34,10 @@ class AdminRoleRoute(BaseRoute):
             response_key='id',
         )
 
-    async def delete(self, id_: int):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/delete',
-            parameters={
-                'id': id_,
-            },
-        )
-
     async def get(self, id_: int):
         return await self.request(
             type_=RequestTypes.GET,
             prefix='/get',
-            token_required=False,
             parameters={
                 'id': id_,
             },
@@ -58,6 +48,14 @@ class AdminRoleRoute(BaseRoute):
         return await self.request(
             type_=RequestTypes.GET,
             prefix='/list/get',
-            token_required=False,
             response_key='roles',
+        )
+
+    async def delete(self, id_: int):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/delete',
+            parameters={
+                'id': id_,
+            },
         )

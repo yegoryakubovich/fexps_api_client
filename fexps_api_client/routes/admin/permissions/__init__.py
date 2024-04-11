@@ -32,15 +32,6 @@ class AdminPermissionRoute(BaseRoute):
             response_key='id',
         )
 
-    async def delete(self, id_str: str):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/delete',
-            parameters={
-                'id_str': id_str,
-            },
-        )
-
     async def get(self, id_str: str):
         return await self.request(
             type_=RequestTypes.GET,
@@ -56,4 +47,13 @@ class AdminPermissionRoute(BaseRoute):
             type_=RequestTypes.GET,
             prefix='/list/get',
             response_key='permissions',
+        )
+
+    async def delete(self, id_str: str):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/delete',
+            parameters={
+                'id_str': id_str,
+            },
         )
