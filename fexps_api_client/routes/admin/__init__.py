@@ -20,6 +20,7 @@ from .accounts import AdminAccountRoute
 from .commissions_packs import AdminCommissionPackRoute
 from .countries import AdminCountryRoute
 from .currencies import AdminCurrencyRoute
+from .images import AdminImageRoute
 from .languages import AdminLanguageRoute
 from .methods import AdminMethodRoute
 from .orders import AdminOrderRoute
@@ -37,6 +38,7 @@ class AdminRoute(BaseRoute):
     commissions_packs = AdminCommissionPackRoute()
     countries = AdminCountryRoute()
     currencies = AdminCurrencyRoute()
+    images = AdminImageRoute()
     languages = AdminLanguageRoute()
     methods = AdminMethodRoute()
     orders = AdminOrderRoute()

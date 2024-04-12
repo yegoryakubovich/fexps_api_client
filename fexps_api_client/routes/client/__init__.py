@@ -20,6 +20,7 @@ from .accounts import ClientAccountRoute
 from .contacts import ClientContactRoute
 from .countries import ClientCountryRoute
 from .currencies import ClientCurrencyRoute
+from .images import ClientImageRoute
 from .languages import ClientLanguageRoute
 from .messages import ClientMessageRoute
 from .methods import ClientMethodRoute
@@ -40,6 +41,7 @@ class ClientRoute(BaseRoute):
     contacts = ClientContactRoute()
     countries = ClientCountryRoute()
     currencies = ClientCurrencyRoute()
+    images = ClientImageRoute()
     languages = ClientLanguageRoute()
     messages = ClientMessageRoute()
     methods = ClientMethodRoute()
