@@ -20,19 +20,9 @@ from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
 class AdminWalletRoute(BaseRoute):
-    prefix = '/bans'
+    prefix = '/wallets'
 
     bans = AdminWalletBanRoute()
-
-    async def create(self, name: str):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/create',
-            parameters={
-                'name': name,
-            },
-            response_key='id',
-        )
 
     async def get(self, id_):
         return await self.request(
@@ -44,28 +34,23 @@ class AdminWalletRoute(BaseRoute):
             response_key='wallet',
         )
 
-    async def get_list(self):
+    async def get_list(self, account_id: int = None):
         return await self.request(
             type_=RequestTypes.GET,
             prefix='/list/get',
+            parameters={
+                'account_id': account_id,
+            },
             response_key='wallets',
         )
 
-    async def update(self, id_: int, name: str):
+    async def update(self, id_: int, name: str = None, commission_pack_id: int = None):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/update',
             parameters={
                 'id_': id_,
                 'name': name,
-            },
-        )
-
-    async def delete(self, id_: int):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/delete',
-            parameters={
-                'id_': id_,
+                'commission_pack_id': commission_pack_id,
             },
         )
