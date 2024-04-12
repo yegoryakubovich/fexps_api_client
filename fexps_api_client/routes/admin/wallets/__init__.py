@@ -35,12 +35,12 @@ class AdminWalletRoute(BaseRoute):
         )
 
     async def get_list(self, account_id: int = None):
+        # FIXME
+        parameters = {'account_id': account_id} if account_id else {}
         return await self.request(
             type_=RequestTypes.GET,
             prefix='/list/get',
-            parameters={
-                'account_id': account_id,
-            },
+            parameters=parameters,
             response_key='wallets',
         )
 
