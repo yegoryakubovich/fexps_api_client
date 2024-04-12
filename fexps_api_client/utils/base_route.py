@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+
 from datetime import datetime, timedelta
 from io import BufferedReader
 
@@ -120,6 +122,7 @@ class BaseRoute:
                 response = await session.post(url=url, data=data)
             elif type_ == RequestTypes.POST:
                 response = await session.post(url=url, json=json)
+
             try:
                 response_json = await response.json()
                 rec_keys(response_json, deviation=self.deviation)
@@ -130,6 +133,7 @@ class BaseRoute:
         if response.state == 'successful':
             if response_key:
                 response = response.get(response_key)
+
             return response
         elif response.state == 'error':
             try:
