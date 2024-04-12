@@ -35,10 +35,19 @@ class AdminCommissionPackRoute(BaseRoute):
             response_key='id',
         )
 
+    async def get(self, id_: int):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/get',
+            parameters={
+                'id_': id_,
+            },
+            response_key='commission_pack',
+        )
+
     async def get_list(self):
         return await self.request(
             type_=RequestTypes.GET,
-            token_required=False,
             prefix='/list/get',
             response_key='commissions_packs',
         )

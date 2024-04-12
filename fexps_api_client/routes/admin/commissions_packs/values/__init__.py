@@ -41,3 +41,32 @@ class AdminCommissionPackValueRoute(BaseRoute):
             },
             response_key='id',
         )
+
+    async def get(self, id_: int):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/get',
+            parameters={
+                'id_': id_,
+            },
+            response_key='commission_pack_value',
+        )
+
+    async def get_list(self, commission_pack_id: int):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/list/get',
+            parameters={
+                'commission_pack_id': commission_pack_id,
+            },
+            response_key='commissions_packs_values',
+        )
+
+    async def delete(self, id_: int):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/delete',
+            parameters={
+                'id_': id_,
+            },
+        )
