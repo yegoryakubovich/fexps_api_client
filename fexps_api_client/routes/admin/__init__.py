@@ -18,6 +18,7 @@
 from fexps_api_client.utils import BaseRoute
 from .accounts import AdminAccountRoute
 from .commissions_packs import AdminCommissionPackRoute
+from .contacts import AdminContactRoute
 from .countries import AdminCountryRoute
 from .currencies import AdminCurrencyRoute
 from .images import AdminImageRoute
@@ -36,6 +37,7 @@ class AdminRoute(BaseRoute):
 
     accounts = AdminAccountRoute()
     commissions_packs = AdminCommissionPackRoute()
+    contacts = AdminContactRoute()
     countries = AdminCountryRoute()
     currencies = AdminCurrencyRoute()
     images = AdminImageRoute()
