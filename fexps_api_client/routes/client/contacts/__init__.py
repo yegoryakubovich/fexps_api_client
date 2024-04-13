@@ -21,16 +21,6 @@ from fexps_api_client.utils import BaseRoute, RequestTypes
 class ClientContactRoute(BaseRoute):
     prefix = '/contacts'
 
-    async def create(self, name: str):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/create',
-            parameters={
-                'name': name,
-            },
-            response_key='id',
-        )
-
     async def get(self, id_):
         return await self.request(
             type_=RequestTypes.GET,
@@ -48,13 +38,4 @@ class ClientContactRoute(BaseRoute):
             prefix='/list/get',
             token_required=False,
             response_key='contacts',
-        )
-
-    async def delete(self, id_: int):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/delete',
-            parameters={
-                'id_': id_,
-            },
         )
