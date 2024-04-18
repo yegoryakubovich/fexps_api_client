@@ -16,10 +16,13 @@
 
 
 from fexps_api_client.utils import BaseRoute, RequestTypes
+from .updates import ClientRequestUpdateRoute
 
 
 class ClientRequestRoute(BaseRoute):
     prefix = '/requests'
+
+    updates = ClientRequestUpdateRoute()
 
     async def create(
             self,
@@ -74,24 +77,5 @@ class ClientRequestRoute(BaseRoute):
                 'is_completed': is_completed,
                 'is_canceled': is_canceled,
                 'page': page,
-            },
-        )
-
-    async def update_name(self, id_: int, name: str):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/update/name',
-            parameters={
-                'id_': id_,
-                'name': name,
-            },
-        )
-
-    async def update_confirmation(self, id_: int):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/update/confirmation',
-            parameters={
-                'id_': id_,
             },
         )

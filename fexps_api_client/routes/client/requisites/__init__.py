@@ -16,10 +16,13 @@
 
 
 from fexps_api_client.utils import BaseRoute, RequestTypes
+from .updates import ClientRequisiteUpdateRoute
 
 
 class ClientRequisiteRoute(BaseRoute):
     prefix = '/requisites'
+
+    updates = ClientRequisiteUpdateRoute()
 
     async def create(
             self,
@@ -77,19 +80,5 @@ class ClientRequisiteRoute(BaseRoute):
                 'is_input': is_input,
                 'is_output': is_output,
                 'page': page,
-            },
-        )
-
-    async def update(
-            self,
-            id_: int,
-            total_value: int,
-    ):
-        return await self.request(
-            type_=RequestTypes.POST,
-            prefix='/update',
-            parameters={
-                'id_': id_,
-                'total_value': total_value,
             },
         )
