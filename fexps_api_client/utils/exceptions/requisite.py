@@ -21,3 +21,13 @@ from .base import ApiException
 class RequisiteMinimumValueError(ApiException):
     code = 7000
     message = 'Minimum value = {access_change_balance}'
+
+
+class RequisiteActiveOrdersExistsError(ApiException):
+    code = 7001
+    message = 'Requisite.{id_value} has active orders, unable to execute "{action}"'
+
+
+class RequisiteStateWrong(ApiException):
+    code = 7002
+    message = 'Requisite.{id_value} has state "{state}", but should have state "{need_state}"'
