@@ -18,8 +18,8 @@
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class AdminImageRoute(BaseRoute):
-    prefix = '/images'
+class AdminFileRoute(BaseRoute):
+    prefix = '/files'
 
     async def create(
             self,

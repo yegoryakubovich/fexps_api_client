@@ -21,7 +21,7 @@ from .commissions_packs import AdminCommissionPackRoute
 from .contacts import AdminContactRoute
 from .countries import AdminCountryRoute
 from .currencies import AdminCurrencyRoute
-from .images import AdminImageRoute
+from .files import AdminFileRoute
 from .languages import AdminLanguageRoute
 from .methods import AdminMethodRoute
 from .orders import AdminOrderRoute
@@ -40,7 +40,7 @@ class AdminRoute(BaseRoute):
     contacts = AdminContactRoute()
     countries = AdminCountryRoute()
     currencies = AdminCurrencyRoute()
-    images = AdminImageRoute()
+    files = AdminFileRoute()
     languages = AdminLanguageRoute()
     methods = AdminMethodRoute()
     orders = AdminOrderRoute()
