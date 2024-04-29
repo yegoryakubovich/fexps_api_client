@@ -38,6 +38,29 @@ class ClientOrderRequestRoute(BaseRoute):
             response_key='id',
         )
 
+    async def get(
+            self,
+            id_: int,
+    ):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/get',
+            parameters={
+                'id_': id_,
+            },
+            response_key='order_request',
+        )
+
+    async def get_list(self, order_id: int):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/list/get',
+            parameters={
+                'order_id': order_id,
+            },
+            response_key='orders_requests',
+        )
+
     async def update(self, id_: int, state: str):
         return await self.request(
             type_=RequestTypes.POST,
