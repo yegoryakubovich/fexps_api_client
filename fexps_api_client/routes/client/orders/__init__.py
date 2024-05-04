@@ -24,9 +24,15 @@ from .updates import ClientOrderUpdateRoute
 class ClientOrderRoute(BaseRoute):
     prefix = '/orders'
 
-    list_get = ClientOrderListGetRoute()
-    updates = ClientOrderUpdateRoute()
-    requests = ClientOrderRequestRoute()
+    list_get: ClientOrderListGetRoute
+    updates: ClientOrderUpdateRoute
+    requests: ClientOrderRequestRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.list_get = ClientOrderListGetRoute(url=self.url, token=token, deviation=deviation)
+        self.updates = ClientOrderUpdateRoute(url=self.url, token=token, deviation=deviation)
+        self.requests = ClientOrderRequestRoute(url=self.url, token=token, deviation=deviation)
 
     async def get(self, id_):
         return await self.request(

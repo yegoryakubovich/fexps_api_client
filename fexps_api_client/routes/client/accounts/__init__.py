@@ -22,7 +22,11 @@ from .contacts import ClientAccountContactRoute
 class ClientAccountRoute(BaseRoute):
     prefix = '/accounts'
 
-    contacts = ClientAccountContactRoute()
+    contacts: ClientAccountContactRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.contacts = ClientAccountContactRoute(url=self.url, token=token, deviation=deviation)
 
     async def create(
             self,

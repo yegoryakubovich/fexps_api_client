@@ -23,8 +23,13 @@ from .translations import AdminTextTranslationRoute
 class AdminTextRoute(BaseRoute):
     prefix = '/texts'
 
-    translations = AdminTextTranslationRoute()
-    packs = AdminTextPackRoute()
+    translations: AdminTextTranslationRoute
+    packs: AdminTextPackRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.translations = AdminTextTranslationRoute(url=self.url, token=token, deviation=deviation)
+        self.packs = AdminTextPackRoute(url=self.url, token=token, deviation=deviation)
 
     async def create(
             self,

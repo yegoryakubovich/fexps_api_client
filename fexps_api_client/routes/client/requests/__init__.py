@@ -22,7 +22,11 @@ from .updates import ClientRequestUpdateRoute
 class ClientRequestRoute(BaseRoute):
     prefix = '/requests'
 
-    updates = ClientRequestUpdateRoute()
+    updates: ClientRequestUpdateRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.updates = ClientRequestUpdateRoute(url=self.url, token=token, deviation=deviation)
 
     async def create(
             self,

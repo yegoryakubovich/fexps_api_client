@@ -35,17 +35,34 @@ from .wallets import AdminWalletRoute
 class AdminRoute(BaseRoute):
     prefix = '/admin'
 
-    accounts = AdminAccountRoute()
-    commissions_packs = AdminCommissionPackRoute()
-    contacts = AdminContactRoute()
-    countries = AdminCountryRoute()
-    currencies = AdminCurrencyRoute()
-    files = AdminFileRoute()
-    languages = AdminLanguageRoute()
-    methods = AdminMethodRoute()
-    orders = AdminOrderRoute()
-    permissions = AdminPermissionRoute()
-    roles = AdminRoleRoute()
-    texts = AdminTextRoute()
-    timezones = AdminTimezoneRoute()
-    wallets = AdminWalletRoute()
+    accounts: AdminAccountRoute
+    commissions_packs: AdminCommissionPackRoute
+    contacts: AdminContactRoute
+    countries: AdminCountryRoute
+    currencies: AdminCurrencyRoute
+    files: AdminFileRoute
+    languages: AdminLanguageRoute
+    methods: AdminMethodRoute
+    orders: AdminOrderRoute
+    permissions: AdminPermissionRoute
+    roles: AdminRoleRoute
+    texts: AdminTextRoute
+    timezones: AdminTimezoneRoute
+    wallets: AdminWalletRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.accounts = AdminAccountRoute(url=self.url, token=token, deviation=deviation)
+        self.commissions_packs = AdminCommissionPackRoute(url=self.url, token=token, deviation=deviation)
+        self.contacts = AdminContactRoute(url=self.url, token=token, deviation=deviation)
+        self.countries = AdminCountryRoute(url=self.url, token=token, deviation=deviation)
+        self.currencies = AdminCurrencyRoute(url=self.url, token=token, deviation=deviation)
+        self.files = AdminFileRoute(url=self.url, token=token, deviation=deviation)
+        self.languages = AdminLanguageRoute(url=self.url, token=token, deviation=deviation)
+        self.methods = AdminMethodRoute(url=self.url, token=token, deviation=deviation)
+        self.orders = AdminOrderRoute(url=self.url, token=token, deviation=deviation)
+        self.permissions = AdminPermissionRoute(url=self.url, token=token, deviation=deviation)
+        self.roles = AdminRoleRoute(url=self.url, token=token, deviation=deviation)
+        self.texts = AdminTextRoute(url=self.url, token=token, deviation=deviation)
+        self.timezones = AdminTimezoneRoute(url=self.url, token=token, deviation=deviation)
+        self.wallets = AdminWalletRoute(url=self.url, token=token, deviation=deviation)

@@ -22,7 +22,11 @@ from .values import AdminCommissionPackValueRoute
 class AdminCommissionPackRoute(BaseRoute):
     prefix = '/commissions/packs'
 
-    values = AdminCommissionPackValueRoute()
+    values: AdminCommissionPackValueRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.values = AdminCommissionPackValueRoute(url=self.url, token=token, deviation=deviation)
 
     async def create(self, name: str, is_default: bool):
         return await self.request(

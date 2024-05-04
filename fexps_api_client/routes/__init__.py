@@ -21,5 +21,13 @@ from fexps_api_client.utils import BaseApiClient
 
 
 class FexpsApiClient(BaseApiClient):
-    client = ClientRoute()
-    admin = AdminRoute()
+    client: ClientRoute
+    admin: AdminRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.client = ClientRoute(url=self.url, token=token, deviation=deviation)
+        self.admin = AdminRoute(url=self.url, token=token, deviation=deviation)
+
+
+

@@ -22,4 +22,8 @@ from .packs import ClientTextPackRoute
 class ClientTextRoute(BaseRoute):
     prefix = '/texts'
 
-    packs = ClientTextPackRoute()
+    packs: ClientTextPackRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.packs = ClientTextPackRoute(url=self.url, token=token, deviation=deviation)

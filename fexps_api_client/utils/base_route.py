@@ -15,6 +15,7 @@
 #
 
 
+import logging
 from datetime import datetime, timedelta
 from io import BufferedReader
 
@@ -53,19 +54,13 @@ def rec_keys(dictio, deviation: int):
 class BaseRoute:
     url: str = ''
     prefix: str = ''
-    token: str = None
 
     def __init__(self, url: str = None, token: str = None, deviation: int = 0):
         if not url:
             return
-
         self.url = url + self.prefix
         self.token = token
         self.deviation = deviation
-        for i in dir(self):
-            if issubclass(eval(f'type(self.{i})'), BaseRoute):
-                route: BaseRoute = eval(f'self.{i}')
-                route.__init__(url=self.url, token=self.token, deviation=self.deviation)
 
     async def create_url(self, prefix: str, parameters: dict) -> str:
         f = furl(url=self.url + prefix)
@@ -136,6 +131,7 @@ class BaseRoute:
 
             return response
         elif response.state == 'error':
+            logging.critical(response_json)
             try:
                 raise exceptions[response.error.code](message=response.error.message, kwargs=response.error.kwargs)
             except TypeError:

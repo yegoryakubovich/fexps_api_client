@@ -22,7 +22,11 @@ from .permissions import AdminRolePermissionRoute
 class AdminRoleRoute(BaseRoute):
     prefix = '/roles'
 
-    permissions = AdminRolePermissionRoute()
+    permissions: AdminRolePermissionRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.permissions = AdminRolePermissionRoute(url=self.url, token=token, deviation=deviation)
 
     async def create(self, name: str):
         return await self.request(

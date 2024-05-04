@@ -22,4 +22,8 @@ from .requests import AdminOrderRequestRoute
 class AdminOrderRoute(BaseRoute):
     prefix = '/orders'
 
-    requests = AdminOrderRequestRoute()
+    requests: AdminOrderRequestRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.requests = AdminOrderRequestRoute(url=self.url, token=token, deviation=deviation)

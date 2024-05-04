@@ -22,7 +22,11 @@ from .roles import AdminAccountRolesRoute
 class AdminAccountRoute(BaseRoute):
     prefix = '/accounts'
 
-    roles = AdminAccountRolesRoute()
+    roles: AdminAccountRolesRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.roles = AdminAccountRolesRoute(url=self.url, token=token, deviation=deviation)
 
     async def get(self, id_: int = None):
         return await self.request(

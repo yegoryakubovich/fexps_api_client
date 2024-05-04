@@ -15,6 +15,8 @@
 #
 
 
+import logging
+
 from fexps_api_client.utils.base_route import BaseRoute
 
 

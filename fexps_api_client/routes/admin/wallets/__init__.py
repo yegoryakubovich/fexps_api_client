@@ -22,7 +22,11 @@ from fexps_api_client.utils import BaseRoute, RequestTypes
 class AdminWalletRoute(BaseRoute):
     prefix = '/wallets'
 
-    bans = AdminWalletBanRoute()
+    bans: AdminWalletBanRoute
+
+    def __init__(self, url: str, token: str = None, deviation: int = 0):
+        super().__init__(url=url, token=token, deviation=deviation)
+        self.bans = AdminWalletBanRoute(url=self.url, token=token, deviation=deviation)
 
     async def get(self, id_):
         return await self.request(
