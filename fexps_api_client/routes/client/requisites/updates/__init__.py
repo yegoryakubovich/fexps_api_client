@@ -48,12 +48,12 @@ class ClientRequisiteUpdateRoute(BaseRoute):
             },
         )
 
-    async def value(self, id_: int, value: int, ):
+    async def value(self, id_: int, currency_value: int, ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/value',
             parameters={
                 'id_': id_,
-                'value': value,
+                'currency_value': currency_value,
             },
         )
