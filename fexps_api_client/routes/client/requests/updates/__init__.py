@@ -31,11 +31,12 @@ class ClientRequestUpdateRoute(BaseRoute):
             },
         )
 
-    async def confirmation(self, id_: int):
+    async def confirmation(self, id_: int, answer: bool):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/confirmation',
             parameters={
                 'id_': id_,
+                'answer': answer,
             },
         )
