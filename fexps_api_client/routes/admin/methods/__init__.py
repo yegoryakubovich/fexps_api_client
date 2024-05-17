@@ -27,8 +27,13 @@ class AdminMethodRoute(BaseRoute):
             name: str,
             fields: list[dict],
             input_fields: list[dict],
+            rate_input_default: int,
+            rate_output_default: int,
+            rate_input_percent: int,
+            rate_output_percent: int,
             color: str,
             bgcolor: str,
+            is_rate_default: bool,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -38,8 +43,13 @@ class AdminMethodRoute(BaseRoute):
                 'name': name,
                 'fields': fields,
                 'input_fields': input_fields,
+                'rate_input_default': rate_input_default,
+                'rate_output_default': rate_output_default,
+                'rate_input_percent': rate_input_percent,
+                'rate_output_percent': rate_output_percent,
                 'color': color,
                 'bgcolor': bgcolor,
+                'is_rate_default': is_rate_default,
             },
             response_key='id',
         )
@@ -50,8 +60,13 @@ class AdminMethodRoute(BaseRoute):
             currency_id_str: str = None,
             fields: list = None,
             input_fields: list = None,
+            rate_input_default: int = None,
+            rate_output_default: int = None,
+            rate_input_percent: int = None,
+            rate_output_percent: int = None,
             color: str = None,
             bgcolor: str = None,
+            is_rate_default: bool = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -61,8 +76,13 @@ class AdminMethodRoute(BaseRoute):
                 'currency_id_str': currency_id_str,
                 'fields': fields,
                 'input_fields': input_fields,
+                'rate_input_default': rate_input_default,
+                'rate_output_default': rate_output_default,
+                'rate_input_percent': rate_input_percent,
+                'rate_output_percent': rate_output_percent,
                 'color': color,
                 'bgcolor': bgcolor,
+                'is_rate_default': is_rate_default,
             },
         )
 
