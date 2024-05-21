@@ -57,7 +57,8 @@ class AdminMethodRoute(BaseRoute):
     async def update(
             self,
             id_: int,
-            currency_id_str: str = None,
+            currency: str = None,
+            name: str = None,
             fields: list = None,
             input_fields: list = None,
             rate_input_default: int = None,
@@ -73,7 +74,8 @@ class AdminMethodRoute(BaseRoute):
             prefix='/update',
             parameters={
                 'id_': id_,
-                'currency_id_str': currency_id_str,
+                'currency': currency,
+                'name': name,
                 'fields': fields,
                 'input_fields': input_fields,
                 'rate_input_default': rate_input_default,
