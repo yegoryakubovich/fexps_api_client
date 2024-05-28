@@ -24,6 +24,7 @@ from .files import ClientFileRoute
 from .languages import ClientLanguageRoute
 from .messages import ClientMessageRoute
 from .methods import ClientMethodRoute
+from .notifications import ClientNotificationRoute
 from .orders import ClientOrderRoute
 from .requests import ClientRequestRoute
 from .requisites import ClientRequisiteRoute
@@ -45,6 +46,7 @@ class ClientRoute(BaseRoute):
     languages: ClientLanguageRoute
     messages: ClientMessageRoute
     methods: ClientMethodRoute
+    notifications: ClientNotificationRoute
     orders: ClientOrderRoute
     requests: ClientRequestRoute
     requisites: ClientRequisiteRoute
@@ -66,6 +68,7 @@ class ClientRoute(BaseRoute):
         self.languages = ClientLanguageRoute(url=self.url, token=token, deviation=deviation)
         self.messages = ClientMessageRoute(url=self.url, token=token, deviation=deviation)
         self.methods = ClientMethodRoute(url=self.url, token=token, deviation=deviation)
+        self.notifications = ClientNotificationRoute(url=self.url, token=token, deviation=deviation)
         self.orders = ClientOrderRoute(url=self.url, token=token, deviation=deviation)
         self.requests = ClientRequestRoute(url=self.url, token=token, deviation=deviation)
         self.requisites = ClientRequisiteRoute(url=self.url, token=token, deviation=deviation)
