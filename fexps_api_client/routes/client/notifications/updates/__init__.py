@@ -27,8 +27,22 @@ class ClientNotificationUpdateRoute(BaseRoute):
             prefix='/code',
         )
 
-    async def settings(self):  # FIXME
+    async def settings(
+            self,
+            is_request_change: bool,
+            is_requisite_change: bool,
+            is_order_change: bool,
+            is_chat_change: bool,
+            is_active: bool,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/settings',
+            parameters={
+                'is_request_change': is_request_change,
+                'is_requisite_change': is_requisite_change,
+                'is_order_change': is_order_change,
+                'is_chat_change': is_chat_change,
+                'is_active': is_active,
+            }
         )
