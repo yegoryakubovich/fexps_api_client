@@ -79,7 +79,6 @@ class ClientRequestRoute(BaseRoute):
                 'output_currency_value': output_currency_value,
                 'output_value': output_value,
             },
-            response_key='id',
         )
 
     async def get(
