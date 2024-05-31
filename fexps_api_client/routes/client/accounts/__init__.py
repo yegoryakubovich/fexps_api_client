@@ -38,7 +38,6 @@ class ClientAccountRoute(BaseRoute):
             language: str,
             timezone: str,
             currency: str,
-            surname: str = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -49,7 +48,6 @@ class ClientAccountRoute(BaseRoute):
                 'password': password,
                 'firstname': firstname,
                 'lastname': lastname,
-                'surname': surname,
                 'country': country,
                 'language': language,
                 'timezone': timezone,
