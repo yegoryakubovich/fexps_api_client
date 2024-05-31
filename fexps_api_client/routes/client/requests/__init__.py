@@ -57,27 +57,17 @@ class ClientRequestRoute(BaseRoute):
 
     async def calc(
             self,
-            wallet_id: int,
             type_: str,
             input_method_id: int = None,
-            input_currency_value: int = None,
-            input_value: int = None,
             output_requisite_data_id: int = None,
-            output_currency_value: int = None,
-            output_value: int = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/calc',
             parameters={
-                'wallet_id': wallet_id,
                 'type_': type_,
                 'input_method_id': input_method_id,
-                'input_currency_value': input_currency_value,
-                'input_value': input_value,
                 'output_requisite_data_id': output_requisite_data_id,
-                'output_currency_value': output_currency_value,
-                'output_value': output_value,
             },
         )
 
