@@ -131,6 +131,8 @@ class BaseRoute:
 
             return response
         elif response.state == 'error':
+            logging.critical(url)
+            logging.critical(url_parameters)
             logging.critical(response_json)
             try:
                 raise exceptions[response.error.code](message=response.error.message, kwargs=response.error.kwargs)
