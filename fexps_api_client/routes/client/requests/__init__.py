@@ -58,16 +58,16 @@ class ClientRequestRoute(BaseRoute):
     async def calc(
             self,
             type_: str,
-            input_method_id: int = None,
-            output_requisite_data_id: int = None,
+            input_currency_id_str: str = None,
+            output_currency_id_str: str = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/calc',
             parameters={
                 'type_': type_,
-                'input_method_id': input_method_id,
-                'output_requisite_data_id': output_requisite_data_id,
+                'input_currency_id_str': input_currency_id_str,
+                'output_currency_id_str': output_currency_id_str,
             },
         )
 
