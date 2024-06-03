@@ -29,20 +29,24 @@ class ClientNotificationUpdateRoute(BaseRoute):
 
     async def settings(
             self,
-            is_request_change: bool,
-            is_requisite_change: bool,
-            is_order_change: bool,
-            is_chat_change: bool,
+            is_request: bool,
+            is_requisite: bool,
+            is_order: bool,
+            is_chat: bool,
+            is_transfer: bool,
+            is_global: bool,
             is_active: bool,
     ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/settings',
             parameters={
-                'is_request_change': is_request_change,
-                'is_requisite_change': is_requisite_change,
-                'is_order_change': is_order_change,
-                'is_chat_change': is_chat_change,
+                'is_request': is_request,
+                'is_requisite': is_requisite,
+                'is_order': is_order,
+                'is_chat': is_chat,
+                'is_transfer': is_transfer,
+                'is_global': is_global,
                 'is_active': is_active,
             }
         )

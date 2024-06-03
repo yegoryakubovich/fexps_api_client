@@ -63,6 +63,22 @@ class ClientAccountRoute(BaseRoute):
             response_key='account',
         )
 
+    async def change_password(
+            self,
+            account_id: int,
+            current_password: str,
+            new_password: str,
+    ):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/password/change',
+            parameters={
+                'account_id': account_id,
+                'current_password': current_password,
+                'new_password': new_password,
+            },
+        )
+
     async def check_username(self, username: str):
         return await self.request(
             type_=RequestTypes.GET,
