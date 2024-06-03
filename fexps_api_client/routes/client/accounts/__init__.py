@@ -65,7 +65,6 @@ class ClientAccountRoute(BaseRoute):
 
     async def change_password(
             self,
-            account_id: int,
             current_password: str,
             new_password: str,
     ):
@@ -73,7 +72,6 @@ class ClientAccountRoute(BaseRoute):
             type_=RequestTypes.POST,
             prefix='/password/change',
             parameters={
-                'account_id': account_id,
                 'current_password': current_password,
                 'new_password': new_password,
             },
