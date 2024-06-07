@@ -13,25 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from fexps_api_client.routes.client.files.keys import ClientFileKeyRoute
+
+
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class ClientFileRoute(BaseRoute):
-    prefix = '/files'
+class ClientFileKeyRoute(BaseRoute):
+    prefix = '/keys'
 
-    keys: ClientFileKeyRoute
+    async def create(self):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/create',
+        )
 
-    def __init__(self, url: str, token: str = None, deviation: int = 0):
-        super().__init__(url=url, token=token, deviation=deviation)
-        self.keys = ClientFileKeyRoute(url=self.url, token=token, deviation=deviation)
-
-    async def get(self, id_str: str):
+    async def get(self, key: str):
         return await self.request(
             type_=RequestTypes.GET,
             prefix='/get',
             parameters={
-                'id_str': id_str,
+                'key': key,
             },
-            response_key='file',
+            response_key='files_keys',
         )
