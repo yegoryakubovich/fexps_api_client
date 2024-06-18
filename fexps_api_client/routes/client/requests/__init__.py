@@ -53,14 +53,12 @@ class ClientRequestRoute(BaseRoute):
             response_key='id',
         )
 
-    async def calc(
+    async def calculate(
             self,
             wallet_id: int,
             type_: str,
             input_method_id: int = None,
             output_method_id: int = None,
-            input_value: int = None,
-            output_value: int = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -70,8 +68,6 @@ class ClientRequestRoute(BaseRoute):
                 'type_': type_,
                 'input_method_id': input_method_id,
                 'output_method_id': output_method_id,
-                'input_value': input_value,
-                'output_value': output_value,
             },
         )
 
