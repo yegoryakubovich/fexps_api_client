@@ -39,8 +39,6 @@ class ClientRequisiteRoute(BaseRoute):
             currency_value_max: int = None,
             rate: int = None,
             value: int = None,
-            value_min: int = None,
-            value_max: int = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -55,8 +53,6 @@ class ClientRequisiteRoute(BaseRoute):
                 'currency_value_max': currency_value_max,
                 'rate': rate,
                 'value': value,
-                'value_min': value_min,
-                'value_max': value_max,
             },
             response_key='id',
         )
