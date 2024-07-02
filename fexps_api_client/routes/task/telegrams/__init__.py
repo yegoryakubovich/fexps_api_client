@@ -15,19 +15,26 @@
 #
 
 
-from fexps_api_client.utils import BaseApiClient
-from .admin import AdminRoute
-from .client import ClientRoute
-from .task import TaskRoute
+from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class FexpsApiClient(BaseApiClient):
-    task: TaskRoute
-    admin: AdminRoute
-    client: ClientRoute
+class TaskTelegramRoute(BaseRoute):
+    prefix = '/telegrams'
 
-    def __init__(self, url: str, token: str = None, deviation: int = 0):
-        super().__init__(url=url, token=token, deviation=deviation)
-        self.task = TaskRoute(url=self.url, token=token, deviation=deviation)
-        self.admin = AdminRoute(url=self.url, token=token, deviation=deviation)
-        self.client = ClientRoute(url=self.url, token=token, deviation=deviation)
+    async def send_image(self):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/images/send',
+        )
+
+    async def send_notification(self):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/notifications/send',
+        )
+
+    async def update_image(self):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/images/update',
+        )
