@@ -18,11 +18,11 @@
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class TaskRateParserRoute(BaseRoute):
-    prefix = '/parsers'
+class TaskFileKeyRoute(BaseRoute):
+    prefix = '/keys'
 
-    async def bybit(self):
+    async def close(self):
         return await self.request(
             type_=RequestTypes.GET,
-            prefix='/bybit',
+            prefix='/close',
         )

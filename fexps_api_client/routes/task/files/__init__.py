@@ -15,27 +15,15 @@
 #
 
 
-from fexps_api_client.utils import BaseRoute, RequestTypes
-from .parsers import TaskRateParserRoute
+from fexps_api_client.utils import BaseRoute
+from .keys import TaskFileKeyRoute
 
 
-class TaskRateRoute(BaseRoute):
-    prefix = '/rates'
+class TaskFileRoute(BaseRoute):
+    prefix = '/files'
 
-    parsers: TaskRateParserRoute
+    keys: TaskFileKeyRoute
 
     def __init__(self, url: str, token: str = None, deviation: int = 0):
         super().__init__(url=url, token=token, deviation=deviation)
-        self.parsers = TaskRateParserRoute(url=self.url, token=token, deviation=deviation)
-
-    async def keep(self):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/keep',
-        )
-
-    async def keep_pair(self):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/pair/keep',
-        )
+        self.keys = TaskFileKeyRoute(url=self.url, token=token, deviation=deviation)
