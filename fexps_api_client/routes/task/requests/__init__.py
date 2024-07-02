@@ -15,18 +15,21 @@
 #
 
 
-from fexps_api_client.utils import BaseRoute
-from .requests import TaskRequestRoute
-from .telegrams import TaskTelegramRoute
+from fexps_api_client.utils import BaseRoute, RequestTypes
+from .states import ClientRequestStateRoute
 
 
-class TaskRoute(BaseRoute):
-    prefix = '/task'
+class TaskRequestRoute(BaseRoute):
+    prefix = '/requests'
 
-    requests: TaskRequestRoute
-    telegrams: TaskTelegramRoute
+    # states: ClientRequestStateRoute
 
-    def __init__(self, url: str, token: str = None, deviation: int = 0):
-        super().__init__(url=url, token=token, deviation=deviation)
-        self.requests = TaskRequestRoute(url=self.url, token=token, deviation=deviation)
-        self.telegrams = TaskTelegramRoute(url=self.url, token=token, deviation=deviation)
+    # def __init__(self, url: str, token: str = None, deviation: int = 0):
+    #     super().__init__(url=url, token=token, deviation=deviation)
+    #     self.states = ClientRequestStateRoute(url=self.url, token=token, deviation=deviation)
+
+    async def rate_fixed(self):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/rate/fixed',
+        )
