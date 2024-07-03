@@ -16,20 +16,13 @@
 
 
 from fexps_api_client.utils import BaseRoute, RequestTypes
-from .states import TaskRequestStateRoute
 
 
 class TaskRequestRoute(BaseRoute):
-    prefix = '/requests'
+    prefix = '/requisites'
 
-    states: TaskRequestStateRoute
-
-    def __init__(self, url: str, token: str = None, deviation: int = 0):
-        super().__init__(url=url, token=token, deviation=deviation)
-        self.states = TaskRequestStateRoute(url=self.url, token=token, deviation=deviation)
-
-    async def rate_fixed(self):
+    async def empty(self):
         return await self.request(
             type_=RequestTypes.GET,
-            prefix='/rate/fixed',
+            prefix='/empty',
         )
