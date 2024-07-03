@@ -19,6 +19,7 @@ from fexps_api_client.utils import BaseRoute
 from .files import TaskFileRoute
 from .rates import TaskRateRoute
 from .requests import TaskRequestRoute
+from .requisites import TaskRequisiteRoute
 from .telegrams import TaskTelegramRoute
 
 
@@ -28,6 +29,7 @@ class TaskRoute(BaseRoute):
     files: TaskFileRoute
     rates: TaskRateRoute
     requests: TaskRequestRoute
+    requisites: TaskRequisiteRoute
     telegrams: TaskTelegramRoute
 
     def __init__(self, url: str, token: str = None, deviation: int = 0):
@@ -35,4 +37,5 @@ class TaskRoute(BaseRoute):
         self.files = TaskFileRoute(url=self.url, token=token, deviation=deviation)
         self.rates = TaskRateRoute(url=self.url, token=token, deviation=deviation)
         self.requests = TaskRequestRoute(url=self.url, token=token, deviation=deviation)
+        self.requisites = TaskRequisiteRoute(url=self.url, token=token, deviation=deviation)
         self.telegrams = TaskTelegramRoute(url=self.url, token=token, deviation=deviation)

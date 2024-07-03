@@ -18,7 +18,7 @@
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class TaskRequestRoute(BaseRoute):
+class TaskRequisiteRoute(BaseRoute):
     prefix = '/requisites'
 
     async def empty(self):
