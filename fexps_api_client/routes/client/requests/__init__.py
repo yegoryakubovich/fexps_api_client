@@ -88,6 +88,7 @@ class ClientRequestRoute(BaseRoute):
             self,
             is_completed: bool = False,
             is_canceled: bool = False,
+            is_partner: bool = False,
             page: int = 1,
     ):
         return await self.request(
@@ -96,6 +97,7 @@ class ClientRequestRoute(BaseRoute):
             parameters={
                 'is_completed': is_completed,
                 'is_canceled': is_canceled,
+                'is_partner': is_partner,
                 'page': page,
             },
         )
