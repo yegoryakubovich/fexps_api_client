@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+from typing import Optional
 
 from fexps_api_client.utils import BaseRoute, RequestTypes
 from .contacts import ClientAccountContactRoute
@@ -63,6 +63,32 @@ class ClientAccountRoute(BaseRoute):
             response_key='account',
         )
 
+    async def update(
+            self,
+            firstname: Optional[str] = None,
+            lastname: Optional[str] = None,
+            file_key: Optional[str] = None,
+    ):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/update',
+            parameters={
+                'firstname': firstname,
+                'lastname': lastname,
+                'file_key': file_key,
+            },
+        )
+
+    async def check_username(self, username: str):
+        return await self.request(
+            type_=RequestTypes.GET,
+            prefix='/username/check',
+            token_required=False,
+            parameters={
+                'username': username,
+            },
+        )
+
     async def change_password(
             self,
             current_password: str,
@@ -74,16 +100,6 @@ class ClientAccountRoute(BaseRoute):
             parameters={
                 'current_password': current_password,
                 'new_password': new_password,
-            },
-        )
-
-    async def check_username(self, username: str):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/username/check',
-            token_required=False,
-            parameters={
-                'username': username,
             },
         )
 
