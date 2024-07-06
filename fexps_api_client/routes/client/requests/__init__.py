@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+from typing import Optional
 
 from fexps_api_client.utils import BaseRoute, RequestTypes
 from .updates import ClientRequestUpdateRoute
@@ -86,6 +86,8 @@ class ClientRequestRoute(BaseRoute):
 
     async def search(
             self,
+            id_: Optional[str] = None,
+            is_active: bool = False,
             is_completed: bool = False,
             is_canceled: bool = False,
             is_partner: bool = False,
@@ -95,6 +97,8 @@ class ClientRequestRoute(BaseRoute):
             type_=RequestTypes.POST,
             prefix='/search',
             parameters={
+                'id_': id_,
+                'is_active': is_active,
                 'is_completed': is_completed,
                 'is_canceled': is_canceled,
                 'is_partner': is_partner,
