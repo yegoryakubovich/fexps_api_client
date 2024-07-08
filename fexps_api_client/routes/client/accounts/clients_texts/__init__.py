@@ -32,12 +32,12 @@ class ClientAccountClientTextRoute(BaseRoute):
             response_key='id',
         )
 
-    async def get(self, id_: int):
+    async def get(self, key: str):
         return await self.request(
             type_=RequestTypes.GET,
             prefix='/get',
             parameters={
-                'id': id_,
+                'key': key,
             },
             response_key='account_client_text',
         )
