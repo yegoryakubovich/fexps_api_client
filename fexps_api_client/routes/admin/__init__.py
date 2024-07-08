@@ -17,6 +17,7 @@
 
 from fexps_api_client.utils import BaseRoute
 from .accounts import AdminAccountRoute
+from .clients_texts import AdminClientTextRoute
 from .commissions_packs import AdminCommissionPackRoute
 from .contacts import AdminContactRoute
 from .countries import AdminCountryRoute
@@ -36,6 +37,7 @@ class AdminRoute(BaseRoute):
     prefix = '/admin'
 
     accounts: AdminAccountRoute
+    clients_texts: AdminClientTextRoute
     commissions_packs: AdminCommissionPackRoute
     contacts: AdminContactRoute
     countries: AdminCountryRoute
@@ -53,6 +55,7 @@ class AdminRoute(BaseRoute):
     def __init__(self, url: str, token: str = None, deviation: int = 0):
         super().__init__(url=url, token=token, deviation=deviation)
         self.accounts = AdminAccountRoute(url=self.url, token=token, deviation=deviation)
+        self.clients_texts = AdminClientTextRoute(url=self.url, token=token, deviation=deviation)
         self.commissions_packs = AdminCommissionPackRoute(url=self.url, token=token, deviation=deviation)
         self.contacts = AdminContactRoute(url=self.url, token=token, deviation=deviation)
         self.countries = AdminCountryRoute(url=self.url, token=token, deviation=deviation)

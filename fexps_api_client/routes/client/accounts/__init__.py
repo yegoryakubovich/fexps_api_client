@@ -13,19 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+
 from typing import Optional
 
 from fexps_api_client.utils import BaseRoute, RequestTypes
+from .clients_texts import ClientAccountClientTextRoute
 from .contacts import ClientAccountContactRoute
 
 
 class ClientAccountRoute(BaseRoute):
     prefix = '/accounts'
 
+    clients_texts: ClientAccountClientTextRoute
     contacts: ClientAccountContactRoute
 
     def __init__(self, url: str, token: str = None, deviation: int = 0):
         super().__init__(url=url, token=token, deviation=deviation)
+        self.clients_texts = ClientAccountClientTextRoute(url=self.url, token=token, deviation=deviation)
         self.contacts = ClientAccountContactRoute(url=self.url, token=token, deviation=deviation)
 
     async def create(

@@ -17,6 +17,7 @@
 
 from fexps_api_client.utils import BaseRoute
 from .accounts import ClientAccountRoute
+from .clients_texts import ClientClientTextRoute
 from .contacts import ClientContactRoute
 from .countries import ClientCountryRoute
 from .currencies import ClientCurrencyRoute
@@ -39,6 +40,7 @@ from .wallets import ClientWalletRoute
 
 class ClientRoute(BaseRoute):
     accounts: ClientAccountRoute
+    clients_texts: ClientClientTextRoute
     contacts: ClientContactRoute
     countries: ClientCountryRoute
     currencies: ClientCurrencyRoute
@@ -61,6 +63,7 @@ class ClientRoute(BaseRoute):
     def __init__(self, url: str, token: str = None, deviation: int = 0):
         super().__init__(url=url, token=token, deviation=deviation)
         self.accounts = ClientAccountRoute(url=self.url, token=token, deviation=deviation)
+        self.clients_texts = ClientClientTextRoute(url=self.url, token=token, deviation=deviation)
         self.contacts = ClientContactRoute(url=self.url, token=token, deviation=deviation)
         self.countries = ClientCountryRoute(url=self.url, token=token, deviation=deviation)
         self.currencies = ClientCurrencyRoute(url=self.url, token=token, deviation=deviation)
