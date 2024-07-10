@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+from typing import Optional
 
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
@@ -34,12 +34,14 @@ class ClientOrderUpdateRoute(BaseRoute):
             self,
             id_: int,
             input_fields: dict,
+            rate: Optional[int] = None,
     ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/confirmation',
             parameters={
                 'id_': id_,
+                'rate': rate,
                 'input_fields': input_fields,
             },
         )

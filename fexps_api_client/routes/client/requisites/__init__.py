@@ -39,6 +39,7 @@ class ClientRequisiteRoute(BaseRoute):
             currency_value_max: int = None,
             rate: int = None,
             value: int = None,
+            is_flex: bool = False,
     ):
         return await self.request(
             type_=RequestTypes.POST,
@@ -53,6 +54,7 @@ class ClientRequisiteRoute(BaseRoute):
                 'currency_value_max': currency_value_max,
                 'rate': rate,
                 'value': value,
+                'is_flex': is_flex,
             },
             response_key='id',
         )
