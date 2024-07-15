@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+from typing import Optional
 
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
@@ -21,7 +21,13 @@ from fexps_api_client.utils import BaseRoute, RequestTypes
 class ClientRequisiteDataRoute(BaseRoute):
     prefix = '/requisites_datas'
 
-    async def create(self, name: str, method_id: int, fields: dict):
+    async def create(
+            self,
+            name: Optional[str],
+            method_id: int,
+            fields: dict,
+            is_disposable: bool = False,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/create',
@@ -29,6 +35,7 @@ class ClientRequisiteDataRoute(BaseRoute):
                 'name': name,
                 'method_id': method_id,
                 'fields': fields,
+                'is_disposable': is_disposable,
             },
             response_key='id',
         )
