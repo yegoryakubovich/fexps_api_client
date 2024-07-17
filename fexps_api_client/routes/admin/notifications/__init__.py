@@ -15,14 +15,22 @@
 #
 
 
-from .base import ApiException
+from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class NotificationTelegramAlreadyLinked(ApiException):
-    code = 12000
-    message = 'Telegram is already linked'
+class AdminNotificationRoute(BaseRoute):
+    prefix = '/notifications'
 
-
-class NotificationAccountNotFound(ApiException):
-    code = 12001
-    message = 'Account by code not found'
+    async def update(
+            self,
+            code: str,
+            telegram_id: int,
+    ):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/update',
+            parameters={
+                'code': code,
+                'telegram_id': telegram_id,
+            }
+        )

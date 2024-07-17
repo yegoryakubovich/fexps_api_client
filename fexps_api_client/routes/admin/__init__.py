@@ -25,6 +25,7 @@ from .currencies import AdminCurrencyRoute
 from .files import AdminFileRoute
 from .languages import AdminLanguageRoute
 from .methods import AdminMethodRoute
+from .notifications import AdminNotificationRoute
 from .orders import AdminOrderRoute
 from .permissions import AdminPermissionRoute
 from .roles import AdminRoleRoute
@@ -45,6 +46,7 @@ class AdminRoute(BaseRoute):
     files: AdminFileRoute
     languages: AdminLanguageRoute
     methods: AdminMethodRoute
+    notifications: AdminNotificationRoute
     orders: AdminOrderRoute
     permissions: AdminPermissionRoute
     roles: AdminRoleRoute
@@ -63,6 +65,7 @@ class AdminRoute(BaseRoute):
         self.files = AdminFileRoute(url=self.url, token=token, deviation=deviation)
         self.languages = AdminLanguageRoute(url=self.url, token=token, deviation=deviation)
         self.methods = AdminMethodRoute(url=self.url, token=token, deviation=deviation)
+        self.notifications = AdminNotificationRoute(url=self.url, token=token, deviation=deviation)
         self.orders = AdminOrderRoute(url=self.url, token=token, deviation=deviation)
         self.permissions = AdminPermissionRoute(url=self.url, token=token, deviation=deviation)
         self.roles = AdminRoleRoute(url=self.url, token=token, deviation=deviation)

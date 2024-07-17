@@ -18,10 +18,10 @@
 from inspect import isclass
 
 from fexps_api_client.utils.exceptions import ApiException
-from fexps_api_client.utils.exceptions import account, commission_pack, main, method, order, request, requisite, role, \
-    text, wallet
+from fexps_api_client.utils.exceptions import account, commission_pack, main, method, notification, order, request, \
+    requisite, role, text, wallet
 
-groups = [account, commission_pack, main, method, order, request, requisite, role, text, wallet]
+groups = [account, commission_pack, main, method, notification, order, request, requisite, role, text, wallet]
 exceptions = {}
 
 for module in groups:
