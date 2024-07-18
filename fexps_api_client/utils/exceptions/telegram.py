@@ -15,17 +15,19 @@
 #
 
 
-from inspect import isclass
+from .base import ApiException
 
-from fexps_api_client.utils.exceptions import ApiException
-from fexps_api_client.utils.exceptions import account, commission_pack, main, method, notification, order, request, \
-    requisite, role, telegram, text, wallet
 
-groups = [account, commission_pack, main, method, notification, order, request, requisite, role, telegram, text, wallet]
-exceptions = {}
+class TelegramImagePathNotFound(ApiException):
+    code = 13000
+    message = 'CommissionPack #{commission_pack_id} not found file {filename}'
 
-for module in groups:
-    for e in [e for e in [eval(f'module.{exception}') for exception in dir(module)] if isclass(e)]:
-        if not issubclass(e, ApiException):
-            pass
-        exceptions[e.code] = e
+
+class TelegramMessageNotFound(ApiException):
+    code = 13001
+    message = 'CommissionPack #{commission_pack_id} message not found'
+
+
+class TelegramPostNotFound(ApiException):
+    code = 13002
+    message = 'CommissionPack #{commission_pack_id} not found post #{message_id}'
