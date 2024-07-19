@@ -18,17 +18,11 @@
 from fexps_api_client.utils import BaseRoute, RequestTypes
 
 
-class TaskTelegramRoute(BaseRoute):
-    prefix = '/telegrams'
+class TaskNotificationRoute(BaseRoute):
+    prefix = '/notifications'
 
-    async def create(self):
+    async def send(self):
         return await self.request(
             type_=RequestTypes.GET,
-            prefix='/create',
-        )
-
-    async def update(self):
-        return await self.request(
-            type_=RequestTypes.GET,
-            prefix='/update',
+            prefix='/send',
         )

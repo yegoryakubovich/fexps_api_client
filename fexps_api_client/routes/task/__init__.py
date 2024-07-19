@@ -17,6 +17,7 @@
 
 from fexps_api_client.utils import BaseRoute
 from .files import TaskFileRoute
+from .notifications import TaskNotificationRoute
 from .rates import TaskRateRoute
 from .requests import TaskRequestRoute
 from .requisites import TaskRequisiteRoute
@@ -27,6 +28,7 @@ class TaskRoute(BaseRoute):
     prefix = '/task'
 
     files: TaskFileRoute
+    notifications: TaskNotificationRoute
     rates: TaskRateRoute
     requests: TaskRequestRoute
     requisites: TaskRequisiteRoute
@@ -35,6 +37,7 @@ class TaskRoute(BaseRoute):
     def __init__(self, url: str, token: str = None, deviation: int = 0):
         super().__init__(url=url, token=token, deviation=deviation)
         self.files = TaskFileRoute(url=self.url, token=token, deviation=deviation)
+        self.notifications = TaskNotificationRoute(url=self.url, token=token, deviation=deviation)
         self.rates = TaskRateRoute(url=self.url, token=token, deviation=deviation)
         self.requests = TaskRequestRoute(url=self.url, token=token, deviation=deviation)
         self.requisites = TaskRequisiteRoute(url=self.url, token=token, deviation=deviation)
