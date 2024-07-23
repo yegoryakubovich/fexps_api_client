@@ -15,6 +15,8 @@
 #
 
 
+from typing import Optional
+
 from fexps_api_client.utils import BaseRoute, RequestTypes
 from .values import AdminCommissionPackValueRoute
 
@@ -28,12 +30,20 @@ class AdminCommissionPackRoute(BaseRoute):
         super().__init__(url=url, token=token, deviation=deviation)
         self.values = AdminCommissionPackValueRoute(url=self.url, token=token, deviation=deviation)
 
-    async def create(self, name: str, is_default: bool):
+    async def create(
+            self,
+            name: str,
+            telegram_chat_id: Optional[int] = None,
+            telegram_type: Optional[str] = None,
+            is_default: bool = False,
+    ):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/create',
             parameters={
                 'name': name,
+                'telegram_chat_id': telegram_chat_id,
+                'telegram_type': telegram_type,
                 'is_default': is_default,
             },
             response_key='id',
@@ -54,6 +64,26 @@ class AdminCommissionPackRoute(BaseRoute):
             type_=RequestTypes.GET,
             prefix='/list/get',
             response_key='commissions_packs',
+        )
+
+    async def update(
+            self,
+            id_: int,
+            name: str,
+            telegram_chat_id: Optional[int] = None,
+            telegram_type: Optional[str] = None,
+            is_default: bool = False,
+    ):
+        return await self.request(
+            type_=RequestTypes.POST,
+            prefix='/update',
+            parameters={
+                'id_': id_,
+                'name': name,
+                'telegram_chat_id': telegram_chat_id,
+                'telegram_type': telegram_type,
+                'is_default': is_default,
+            },
         )
 
     async def delete(self, id_: int):
