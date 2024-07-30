@@ -16,17 +16,10 @@
 
 
 from fexps_api_client.utils import BaseRoute, RequestTypes
-from .methods import TaskNotificationMethodRoute
 
 
-class TaskNotificationRoute(BaseRoute):
-    prefix = '/notifications'
-
-    methods: TaskNotificationMethodRoute
-
-    def __init__(self, url: str, token: str = None, deviation: int = 0):
-        super().__init__(url=url, token=token, deviation=deviation)
-        self.methods = TaskNotificationMethodRoute(url=self.url, token=token, deviation=deviation)
+class TaskNotificationMethodRoute(BaseRoute):
+    prefix = '/methods'
 
     async def send(self):
         return await self.request(
