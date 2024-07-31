@@ -21,13 +21,14 @@ from fexps_api_client.utils import BaseRoute, RequestTypes
 class AdminClientTextRoute(BaseRoute):
     prefix = '/clients/texts'
 
-    async def create(self, key: str, name: str):
+    async def create(self, key: str, name: str, type_: str):
         return await self.request(
             type_=RequestTypes.POST,
             prefix='/create',
             parameters={
                 'key': key,
                 'name': name,
+                'type_': type_,
             },
             response_key='id',
         )
